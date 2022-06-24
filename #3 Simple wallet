@@ -1,0 +1,34 @@
+--Anyone can send ETH.
+--Only the owner can withdraw.
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+contract EtherWallet{
+address payable owner;
+
+constructor(){
+    owner = payable(msg.sender);
+}
+//A contract can have at most one receive function, 
+//declared using receive() external payable { ... } 
+//(without the function keyword). 
+//This function cannot have arguments, 
+//cannot return anything and 
+//must have external visibility and 
+//payable state mutability. It can be virtual, 
+//can override and can have modifiers.
+receive () external payable{}
+//withdraw function require _amount with uint value type
+function withdraw(uint _amount) external {
+//line 22 checking is contract owner == person who execute contract
+    require(msg.sender == owner, "caller is not a owner");
+//line 25 transferring crypto on address(msg.sender returning address who execute contract). 
+//line 25 actually we would transfer money back to our wallet. 
+payable(msg.sender).transfer(_amount);
+//payable(_getter).transfer(_amount);
+}
+function getbalance() external view returns(uint){
+return address(this).balance;
+    }
+}
