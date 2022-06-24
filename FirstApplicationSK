@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
+
+contract FirstApp {
+uint public counter;
+
+//public - everyone can use this function
+//view - just reading the state varaible.
+//returns - return varaible in uint format
+//uint - Numbers >= 0. e.g uint cant be <0 
+
+function get() public view returns(uint){
+    return counter;
+  }
+function inc() public returns(uint){
+    return counter += 1;
+  }
+function desc() public returns(uint){
+    return counter -= 1;
+  }
+}
